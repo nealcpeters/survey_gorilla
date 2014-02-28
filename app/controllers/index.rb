@@ -9,13 +9,22 @@ puts session[:user_id]
   end
 end
 
-
+get '/logout' do
+  if session
+    session.clear
+  end
+end
 
 get '/survey/create' do
+  # binding.pry
   if session[:user_id] == nil
     redirect '/'
   end
   erb :create_survey
+end
+
+get '/survey/:survey_id' do
+  @survey = session[:current_survey]
 end
 
 get '/survey/create/question' do
@@ -39,6 +48,7 @@ get '/logout' do
     session.clear
   end
 end
+
 
 post '/login' do
   @user = User.find_by_email(params[:email])
