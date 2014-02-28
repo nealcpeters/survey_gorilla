@@ -22,11 +22,18 @@ get '/survey/create/question' do
   erb :create_question
 end
 
+get '/survey/create/confirm' do
+  if session[:user_id] == nil
+    redirect '/'
+  end
+  erb :confirm_survey
+end
+
 #################################################POST
 
 
 post '/login' do
-  @user = User.find_by(params[:email])
+  @user = User.find_by_email(params[:email])
   if @user.authenticate(params[:password])
     session[:user_id] = @user.id
     redirect '/'
@@ -36,7 +43,7 @@ post '/login' do
   end
 end
 
-post '/create_acount' do
+post '/create_account' do
   @user = User.create(params[:user])
   if @user.save
     redirect '/'
@@ -52,15 +59,15 @@ post '/survey/confirm' do
 end
 
 post '/survey/create' do
-  @survey = Survey.create(params[:survey])
-  session[:current_survey] = @survey.id
+  survey = Survey.create(params[:survey])
+  session[:current_survey] = survey.id
   redirect '/survey/create/question'
 end
 
 post '/survey/create/question' do
   @survey = Survey.find(session[:current_survey])
   @survey.questions << Question.new(params[:question])
-  redirect "/survey/create/question/"
+  redirect "/survey/create/question"
 end
 
 post '/survey/create/option' do
@@ -69,6 +76,11 @@ post '/survey/create/option' do
   redirect '/survey/create/question'
 end
 
+post '/survey/create/confirm' do
+  survey = Survey.find(session[:current_survey])
+  survey.save
+  redirect '/survey/create/confirm'
+end
 
 
 
