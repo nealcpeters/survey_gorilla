@@ -1,8 +1,14 @@
 get '/' do
   if session[:user_id] == nil
-    erb :login
+    erb :register
   else
     erb :index
+  end
+end
+
+get '/logout' do
+  if session
+    session.clear
   end
 end
 
@@ -33,6 +39,7 @@ get '/survey/create/confirm' do
 end
 
 #################################################POST
+
 
 
 post '/login' do
