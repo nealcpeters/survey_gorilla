@@ -119,17 +119,8 @@ namespace :db do
 
   desc "Do a full database cycle from drop to seed"
   task :cycle do
-    puts "Dropping DB-----------"
-    Rake::Task['db:drop'].invoke
-    puts "Creating DB-----------"
-    Rake::Task['db:create'].reenable
-    Rake::Task['db:create'].invoke
-    puts "Executing Migrations--"
-    Rake::Task['db:migrate'].reenable
-    Rake::Task['db:migrate'].invoke
-    puts "Seeding DB------------"
-    Rake::Task['db:seed'].reenable
-    Rake::Task['db:seed'].invoke
+       puts "Resetting DB-----------"
+    exec("rake db:drop && rake db:create && rake db:migrate && rake db:seed")
   end
 end
 
