@@ -1,0 +1,22 @@
+
+  <form id="submit-option-form" action='/survey/create/question/option' method="POST">
+    <h2>Question: <%=@question.text%></h2>
+    <label>Option Text</label>
+    <input id="option-field" type="text" name="option[text]" placeholder="Enter to save question"><br>
+
+    <div id="additional-options">
+      <%if @add%>
+        <%= erb :_add_option %>
+      <%end%>
+    </div>
+    <input type="submit" value="enter">
+  </form>
+
+  <form id="add-question-form" action='/survey/create/question' method="GET">
+    <input type="submit" value="add another question">
+  </form>
+
+  <form id="finish-survey-form" action='/survey/create/confirm' method="POST">
+    <input type="submit" value="Finish Survey">
+  </form>
+
