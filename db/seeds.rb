@@ -1,5 +1,5 @@
 
-user = User.create(name: "Jake The Snake", email: "h@gmail.com", password: "password")
+user = User.create(name: "Jake The Snake", email: "h@gmail.com", password: "password", password_confirmation: "password")
 survey = Survey.create(title: "What?", description: "This is a test", is_public: true, user_id: user.id)
 
 5.times do |i|
