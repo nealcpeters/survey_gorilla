@@ -10,8 +10,12 @@ get '/logout' do
   if session
     session.clear
   end
+<<<<<<< HEAD
 
   redirect to '/'
+=======
+  redirect '/'
+>>>>>>> c9f2b0db61a5539b03689c9d8cea4c5136830be7
 end
 
 get '/survey/create' do
@@ -37,6 +41,7 @@ get '/survey/create/confirm' do
   if session[:user_id] == nil
     redirect '/'
   end
+  session[:current_survey] = nil
   erb :confirm_survey
 end
 
@@ -48,7 +53,20 @@ get '/survey/:survey_id/results' do
 
   erb :survey_results
 end
+
+get '/survey/create/question/option' do
+  if session[:user_id] == nil
+    redirect '/'
+  end
+  @question = Question.last
+
+  erb :_create_option
+end
+
+
 #################################################POST
+
+
 
 
 post '/login' do
@@ -85,20 +103,31 @@ post '/survey/create' do
 end
 
 post '/survey/create/question' do
+
   @survey = Survey.find(session[:current_survey])
+  # binding.pry
   @survey.questions << Question.new(params[:question])
-  redirect "/survey/create/question"
+  @question = Question.last
+  @options = true
+  erb :_create_option, layout: false
 end
 
-post '/survey/create/option' do
-  @survey = Survey.find(session[:current_survey])
-  @survey.questions << Question.new(params)
-  redirect '/survey/create/question'
+post '/survey/create/question/option' do
+  @question = Question.last
+  @question.options << Option.new(params[:option])
+  # binding.pry
+  if request.xhr?
+    # binding.pry
+    @add = true
+    erb :_add_option, layout: false
+  else
+    puts "babababa"
+    redirect '/survey/create/question'
+  end
+
 end
 
 post '/survey/create/confirm' do
-  survey = Survey.find(session[:current_survey])
-  survey.save
   redirect '/survey/create/confirm'
 end
 
