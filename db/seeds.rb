@@ -10,3 +10,7 @@ survey = Survey.create(title: "What?", description: "This is a test", is_public:
   answer1 = Answer.create(option_id: option1.id, user_id: user.id)
   answer2 = Answer.create(option_id: option2.id, user_id: user.id)
 end
+
+Survey.create(user_id: 1, title: "Sample survey title", description: "Sample survey description", is_public: true)
+
+
