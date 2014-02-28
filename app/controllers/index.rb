@@ -36,6 +36,21 @@ post '/login' do
   end
 end
 
+post '/create_acount' do
+  @user = User.create(params[:user])
+  if @user.save
+    redirect '/'
+  else
+    @errors = true
+    erb :login
+  end
+end
+
+post '/survey/confirm' do
+  session[:current_survey] = nil
+  redirect '/'
+end
+
 post '/survey/create' do
   @survey = Survey.create(params[:survey])
   session[:current_survey] = @survey.id
@@ -54,11 +69,7 @@ post '/survey/create/option' do
   redirect '/survey/create/question'
 end
 
-post '/survey/confirm' do
-  session[:current_survey] = nil
-  redirect '/'
 
-end
 
 
 
