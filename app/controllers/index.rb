@@ -21,7 +21,9 @@ get '/survey/create' do
 end
 
 get '/survey/:survey_id' do
-  @survey = session[:current_survey]
+  @survey = Survey.find(params[:survey_id])
+
+  erb :take_survey
 end
 
 get '/survey/create/question' do
@@ -69,8 +71,17 @@ post '/create_account' do
 end
 
 post '/survey/confirm' do
-  session[:current_survey] = nil
-  redirect '/'
+  @survey = Survey.find(params[:survey_id])
+  #@question = @survey.
+  params[:option].each do |x|
+    Answer.create(
+      option_id: x[1],
+      user_id: session[:user_id],
+      survey_id: @survey.id,
+      question_id: x[0]
+    )
+  end
+  erb :survey_confirmation
 end
 
 post '/survey/create' do
