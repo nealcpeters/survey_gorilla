@@ -1,7 +1,43 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+
+    //Add Option to Create Option page
+    $(document).on('submit', '#submit-option-form', function(event) {
+        event.preventDefault();
+
+        var url = $(this).attr('action');
+        var data = $(this).serialize();
+
+        $.post(url, data, function(serverResponse) {
+            // console.log(serverResponse);
+            $('#additional-options').append(serverResponse);
+            // console.log(serverResponse);
+        })
+    });
+
+
+
+
+    // Add options to create_question page
+    $('#submit-question-form').on('submit', function(event) {
+        event.preventDefault();
+
+        var url = $(this).attr('action');
+        var data = $(this).serialize();
+
+        // console.log(url)
+        // console.log(data)
+
+        $.post(url, data, function(serverResponse) {
+            console.log(serverResponse)
+
+            $('#submit-question-form').hide();
+            $('#display-options').append(serverResponse);
+            // $('#display-options').css('visibility', 'visible');
+
+        })
+    })
+
+
+
 });
