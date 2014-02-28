@@ -19,3 +19,25 @@ survey = Survey.create(title: "What?", description: "This is a test", is_public:
   answer2 = Answer.create(option_id: option2.id, user_id: 9)
   answer2 = Answer.create(option_id: option2.id, user_id: 11)
 end
+
+Survey.create(user_id: 1, title: "Sample survey title", description: "Sample survey description", is_public: true)
+Question.create(survey_id: 2, text: "asdfasdfasdf")
+Question.create(survey_id: 2, text: "ad;gkhj;lasdlkfklj")
+Question.create(survey_id: 2, text: "tewpuvdsakj;dfa")
+Question.create(survey_id: 2, text: "tpoiua;kdsn;sadfj")
+Option.create(question_id: 2, text: "option 1")
+Option.create(question_id: 2, text: "option 2")
+Option.create(question_id: 2, text: "option 3")
+Option.create(question_id: 3, text: "option 1")
+Option.create(question_id: 3, text: "option 2")
+Option.create(question_id: 3, text: "option 3")
+Option.create(question_id: 4, text: "option 1")
+Option.create(question_id: 4, text: "option 2")
+Option.create(question_id: 4, text: "option 3")
+Option.create(question_id: 5, text: "option 1")
+Option.create(question_id: 5, text: "option 2")
+Option.create(question_id: 5, text: "option 3")
+
+
+
+
