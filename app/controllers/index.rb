@@ -1,6 +1,9 @@
 get '/' do
+  session.clear();
+  session[:user_id] = 1
+puts session[:user_id]
   if session[:user_id] == nil
-    erb :login
+    erb :register
   else
     erb :index
   end
@@ -31,6 +34,11 @@ end
 
 #################################################POST
 
+get '/logout' do
+  if session
+    session.clear
+  end
+end
 
 post '/login' do
   @user = User.find_by_email(params[:email])
