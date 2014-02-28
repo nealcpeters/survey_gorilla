@@ -10,6 +10,8 @@ get '/logout' do
   if session
     session.clear
   end
+
+  redirect to '/'
 end
 
 get '/survey/create' do
@@ -38,13 +40,15 @@ get '/survey/create/confirm' do
   erb :confirm_survey
 end
 
-#################################################POST
-
-get '/logout' do
-  if session
-    session.clear
+get '/survey/:survey_id/results' do
+  @survey = Survey.find_by_id(params[:survey_id])
+  if @survey == nil
+    @error = true
   end
+
+  erb :survey_results
 end
+#################################################POST
 
 
 post '/login' do
@@ -61,6 +65,7 @@ end
 post '/create_account' do
   @user = User.create(params[:user])
   if @user.save
+    session[:user_id] = user.id
     redirect '/'
   else
     @errors = true
