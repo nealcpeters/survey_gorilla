@@ -1,9 +1,10 @@
 <div class="container">
   <form action='/survey/create' method="POST">
-    <label>Survey Title:</label><input type="text" name="title"><br>
-    <label>Survey Description:</label><input type="text" name="description"><br>
-    <label>Make results public? Yes</label><input type="radio" name="public?" value="true">
-    <label>No</label><input type="radio" name="public?" value="false">
+    <label>Survey Title:</label><input type="text" name="survey[title]"><br>
+    <label>Survey Description:</label><input type="text" name="survey[description]"><br>
+    <label>Make results public? Yes</label><input type="radio" name="survey[is_public]" value="true">
+    <label>No</label><input type="radio" name="survey[is_public]" value="false">
+    <input type="hidden" name="survey[user_id]" value="session[:user_id]">
 
     <input type="submit" value="submit">
   </form>

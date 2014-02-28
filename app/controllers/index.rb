@@ -12,8 +12,14 @@ get '/survey/create' do
   if session[:user_id] == nil
     redirect '/'
   end
-
   erb :create_survey
+end
+
+get '/survey/create/question' do
+  if session[:user_id] == nil
+    redirect '/'
+  end
+  erb :create_question
 end
 
 #################################################POST
@@ -31,9 +37,51 @@ post '/login' do
 end
 
 post '/survey/create' do
-  @survey = Survey.create(title: params[:title], user: session[:user_id], description: params[:description], public?: [:public])
+  @survey = Survey.create(params[:survey])
+  session[:current_survey] = @survey.id
+  redirect '/survey/create/question'
 end
 
-post '/survey/question/create' do
-  @survey.questions << Question.new(params)
+post '/survey/create/question' do
+  @survey = Survey.find(session[:current_survey])
+  @survey.questions << Question.new(params[:question])
+  redirect "/survey/create/question/"
 end
+
+post '/survey/create/option' do
+  @survey = Survey.find(session[:current_survey])
+  @survey.questions << Question.new(params)
+  redirect '/survey/create/question'
+end
+
+post '/survey/confirm' do
+  session[:current_survey] = nil
+  redirect '/'
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
