@@ -1,7 +1,4 @@
 get '/' do
-  session.clear();
-  session[:user_id] = 1
-puts session[:user_id]
   if session[:user_id] == nil
     erb :register
   else
