@@ -6,13 +6,16 @@ get '/' do
   end
 end
 
-
-
 get '/survey/create' do
+  # binding.pry
   if session[:user_id] == nil
     redirect '/'
   end
   erb :create_survey
+end
+
+get '/survey/:survey_id' do
+  @survey = session[:current_survey]
 end
 
 get '/survey/create/question' do
