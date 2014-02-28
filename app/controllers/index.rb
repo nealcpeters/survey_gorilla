@@ -10,7 +10,12 @@ get '/logout' do
   if session
     session.clear
   end
+<<<<<<< HEAD
+
+  redirect to '/'
+=======
   redirect '/'
+>>>>>>> c9f2b0db61a5539b03689c9d8cea4c5136830be7
 end
 
 get '/survey/create' do
@@ -42,6 +47,15 @@ get '/survey/create/confirm' do
   erb :confirm_survey
 end
 
+get '/survey/:survey_id/results' do
+  @survey = Survey.find_by_id(params[:survey_id])
+  if @survey == nil
+    @error = true
+  end
+
+  erb :survey_results
+end
+
 get '/survey/create/question/option' do
   if session[:user_id] == nil
     redirect '/'
@@ -50,6 +64,7 @@ get '/survey/create/question/option' do
 
   erb :_create_option
 end
+
 
 #################################################POST
 
@@ -70,6 +85,7 @@ end
 post '/create_account' do
   @user = User.create(params[:user])
   if @user.save
+    session[:user_id] = user.id
     redirect '/'
   else
     @errors = true

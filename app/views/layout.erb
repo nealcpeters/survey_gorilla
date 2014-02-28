@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="/css/application.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/js/bar-graph-stuff.js"></script>
   <script src="/js/application.js"></script>
-
   <title></title>
 </head>
 <body>
@@ -39,7 +39,7 @@
                 <input type="email" name="email" placeholder="e.g., me@example.com" value="<%= @email %>"><br>
                 <label class="label" for="password">Password</label>
                 <input type="password" name="password" placeholder="6 or more characters">
-                <br>
+                <br> <br>
                 <div class="submit"><input type="submit" value="Sign In"></div>
               </form>
             </li>
@@ -50,6 +50,10 @@
 
     </ul>
   </nav>
+  <div class="container">
+  <h1>Survey The Foxes -- Uncaged  </h1>
+  <h2>STFU -- For all your survey needs</h2>
+  </div>
   <%= yield %>
 </body>
 </html>
