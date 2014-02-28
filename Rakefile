@@ -116,6 +116,21 @@ namespace :db do
   task :version do
     puts "Current version: #{ActiveRecord::Migrator.current_version}"
   end
+
+  desc "Do a full database cycle from drop to seed"
+  task :cycle do
+    puts "Dropping DB-----------"
+    Rake::Task['db:drop'].invoke
+    puts "Creating DB-----------"
+    Rake::Task['db:create'].reenable
+    Rake::Task['db:create'].invoke
+    puts "Executing Migrations--"
+    Rake::Task['db:migrate'].reenable
+    Rake::Task['db:migrate'].invoke
+    puts "Seeding DB------------"
+    Rake::Task['db:seed'].reenable
+    Rake::Task['db:seed'].invoke
+  end
 end
 
 desc 'Start IRB with application environment loaded'
