@@ -17,7 +17,6 @@ get '/logout' do
 end
 
 get '/survey/create' do
-  # binding.pry
   if session[:user_id] == nil
     redirect '/'
   end
@@ -63,11 +62,17 @@ get '/survey/create/question/option' do
   erb :_create_option
 end
 
+get '/view_your_surveys' do
+  if session[:user_id] == nil
+    redirect '/'
+  end
+
+  @surveys = User.find(session[:user_id]).surveys
+  erb :list_of_user_surveys
+end
+
 
 #################################################POST
-
-
-
 
 post '/login' do
   @user = User.find_by_email(params[:email])
@@ -76,18 +81,18 @@ post '/login' do
     redirect '/'
   else
     @errors = true
-    erb :login
+    erb :index
   end
 end
 
 post '/create_account' do
   @user = User.create(params[:user])
   if @user.save
-    session[:user_id] = user.id
+    session[:user_id] = @user.id
     redirect '/'
   else
     @errors = true
-    erb :login
+    erb :register
   end
 end
 
@@ -124,19 +129,26 @@ end
 post '/survey/create/question/option' do
   @question = Question.last
   @question.options << Option.new(params[:option])
-  # binding.pry
+
   if request.xhr?
-    # binding.pry
     @add = true
     erb :_add_option, layout: false
   else
-    puts "babababa"
+    # binding.pry
     redirect '/survey/create/question'
   end
+end
 
+post '/final_save' do
+  question = Question.last
+  question.options << Option.new(text: params[:option_text])
+  redirect '/survey/create/question'
 end
 
 post '/survey/create/confirm' do
+  question = Question.last
+  question.options << Option.new(text: params[:option_text])
+
   redirect '/survey/create/confirm'
 end
 

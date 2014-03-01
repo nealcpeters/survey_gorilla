@@ -1,19 +1,19 @@
-
   <form id="submit-option-form" action='/survey/create/question/option' method="POST">
     <h2>Question: <%=@question.text%></h2>
-    <label>Option Text</label>
-    <input id="option-field" type="text" name="option[text]" placeholder="Enter to save question"><br>
+    <label>Choice: </label>
+    <input class="option-field" type="text" name="option[text]"><br>
 
     <div id="additional-options">
       <%if @add%>
         <%= erb :_add_option %>
       <%end%>
     </div>
-    <input type="submit" value="enter">
+    <input type="submit" value="Add Another Choice">
+    <!-- <a href='/survey/create/question/option' method="POST"><button>Add Another Question</button></a> -->
   </form>
 
-  <form id="add-question-form" action='/survey/create/question' method="GET">
-    <input type="submit" value="add another question">
+  <form id="add-question-form" action='/final_save' method="POST">
+    <input type="submit" value="Add Another Question">
   </form>
 
   <form id="finish-survey-form" action='/survey/create/confirm' method="POST">

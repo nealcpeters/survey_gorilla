@@ -3,8 +3,8 @@
   padding: 0;
 }
 body{
-  background-image:url("/img/fox.jpg");
-    background-color: #d4dfd0;
+  /*background-image:url("/img/fox.jpg");*/
+  background-color: #d4dfd0;
 }
 .container {
   margin: 20px auto;
@@ -60,4 +60,12 @@ nav ul li a{
 .title {
   color: red;
   font-size: 30px;
+}
+
+.make_red {
+  color: red;
+}
+
+.survey_list {
+  margin-left: 25px;
 }

@@ -269,6 +269,9 @@
     <br> <br>
     <input type="submit" value="Sign Up">
   </form>
-
+  <%if @errors%>
+      <br>
+      <p class="make_red">Account creation failed</p>
+  <%end%>
 
 </div>

@@ -1,0 +1,9 @@
+<div class="container">
+  <%if @surveys%>
+    <ul>
+    <% @surveys.each do |survey|%>
+       <li><a href="/survey/<%=survey.id%>/results"><%=survey.title%></a></li>
+    <%end%>
+    </ul>
+  <%end%>
+</div>

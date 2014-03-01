@@ -2,11 +2,16 @@
  <!--  <form action='/survey/create' method="GET">
     <input type="submit" value="Create Survey">
   </form> -->
-  <a href="/survey/create">Create</a> <br>
-
-  <br><br>
-  - View Survey Results -
+  <br>
+  - View Public Survey Results - <br>
+  <ul class="survey_list">
   <% @surveys.each do |survey| %>
-    <a href="/survey/<%=survey.id%>/results"><%=survey.title%></a><br>
+    <%if survey.is_public%>
+    <li> <%=survey.title%>
+      | <a href="/survey/<%=survey.id%>"> Take this survey</a>
+      | <a href="/survey/<%=survey.id%>/results"> Results</a>
+    </a></li>
+    <%end%>
   <%end%>
+  </ul>
 </div>
