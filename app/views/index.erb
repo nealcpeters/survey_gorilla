@@ -3,5 +3,10 @@
     <input type="submit" value="Create Survey">
   </form> -->
   <a href="/survey/create">Create</a> <br>
-  <a href="/survey/1/results">Debug -- View Results of First Survey Made</a>
+
+  <br><br>
+  - View Survey Results -
+  <% @surveys.each do |survey| %>
+    <a href="/survey/<%=survey.id%>/results"><%=survey.title%></a><br>
+  <%end%>
 </div>

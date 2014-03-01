@@ -2,6 +2,7 @@ get '/' do
   if session[:user_id] == nil
     erb :register
   else
+    @surveys = Survey.all
     erb :index
   end
 end
@@ -10,12 +11,9 @@ get '/logout' do
   if session
     session.clear
   end
-<<<<<<< HEAD
 
-  redirect to '/'
-=======
   redirect '/'
->>>>>>> c9f2b0db61a5539b03689c9d8cea4c5136830be7
+
 end
 
 get '/survey/create' do
@@ -43,7 +41,7 @@ get '/survey/create/confirm' do
   if session[:user_id] == nil
     redirect '/'
   end
-  session[:current_survey] = nil
+
   erb :confirm_survey
 end
 

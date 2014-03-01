@@ -14,7 +14,7 @@
         <script type="text/javascript">
           arrayOfData = new Array();
           <%question.options.each do |option|%>
-            arrayOfData.push(["<%=Answer.where(option_id: option.id).length%>", "<%=question.text%>",'#'+(Math.random()*0xFFFFFF<<0).toString(16)]);
+            arrayOfData.push(["<%=Answer.where(option_id: option.id).length%>", "<%=option.text%>",'#'+(Math.random()*0xFFFFFF<<0).toString(16)]);
           <%end%>
 
           $("#<%=question.id%>").jqBarGraph({ data: arrayOfData });
